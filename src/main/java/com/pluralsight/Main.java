@@ -1,7 +1,12 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +41,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
-        // ANSI color code variables
+        //Color code variables
         String pink = "\u001B[35m";
         String cyan = "\u001B[36m";
         String yellow = "\u001B[33m";
@@ -75,9 +80,61 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println(red + "⚠\uFE0F Please choose D, P, L, or X." + reset);
+                    System.out.print(yellow + "⚠ " + reset);
+                    System.out.println(red + "Please choose D, P, L, or X." + reset);
             }
         }
         scanner.close();
+    }
+
+    public static void addDeposit(Scanner scanner, ArrayList<Transaction> transactions){
+        //Color code variables
+        String pink = "\u001B[35m";
+        String cyan = "\u001B[36m";
+        String yellow = "\u001B[33m";
+        String red = "\u001B[31m";
+        String green = "\u001B[32m";
+        String reset = "\u001B[0m";
+
+        //Helper method for D
+        System.out.println(pink + "\n╔═══════════════════════════════════╗");
+        System.out.println("║           ADD A DEPOSIT           ║");
+        System.out.println("╠═══════════════════════════════════╣" + reset);
+        System.out.print(pink + "║ " + cyan + "Description:       ║" + reset);
+        String description = scanner.nextLine().trim();
+        System.out.print(pink + "║ " + cyan + "Vendor:      ║" + reset);
+        String vendor = scanner.nextLine().trim();
+        System.out.print(pink + "║ " + cyan + "Amount:      ║" + reset);
+        double amount = Double.parseDouble(scanner.nextLine().trim());
+        System.out.println(pink + "╚═══════════════════════════════════╝" + reset);
+
+        //Generate date and time
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+        String dateStr = currentDate.format(dateFormatter);
+        String timeStr = currentTime.format(timeFormatter);
+
+        //Format CSV line
+        String newLine = dateStr + "|" + timeStr + "|" + description + "|" + vendor + "|" + amount;
+
+        //Save to transanction.csv in append mode
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.csv", true));
+            writer.newLine();
+            writer.write(newLine);
+            writer.close();
+            System.out.println(green + "✅ Deposit successfully added and saved!" + reset);
+        } catch (Exception e) {
+            System.out.println(red + "❌ Error saving deposit to file." + reset);
+            e.printStackTrace();
+        }
+
+        //Add to ArrayList
+        Transaction newTransaction = new Transaction(dateStr, timeStr, description, vendor, amount);
+        transactions.add(newTransaction);
     }
 }
