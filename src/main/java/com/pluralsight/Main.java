@@ -42,7 +42,7 @@ public class Main {
             boolean running = true;
 
             //Color code variables
-            String pink = "\u001B[35m";
+            String pink = "\u001B[95m";
             String cyan = "\u001B[36m";
             String yellow = "\u001B[33m";
             String red = "\u001B[31m";
@@ -82,16 +82,16 @@ public class Main {
 
                     default:
                         System.out.print(yellow + "⚠ " + reset);
-                        System.out.println(red + "Please choose D, P, L, or X." + reset);
+                        System.out.println(red + "Please choose from D, P, L, or X." + reset);
                 }
             }
             scanner.close();
         }
 
-    //Helper method for D
+    //Method for D
     public static void addDeposit(Scanner scanner, ArrayList<Transaction> transactions) {
         //Color code variables
-        String pink = "\u001B[35m";
+        String pink = "\u001B[95m";
         String cyan = "\u001B[36m";
         String yellow = "\u001B[33m";
         String red = "\u001B[31m";
@@ -140,11 +140,11 @@ public class Main {
         //Add to ArrayList
         Transaction newTransaction = new Transaction(dateStr, timeStr, description, vendor, amount);
         transactions.add(newTransaction);
-        }
+    }
 
-    //Helper method for option P
+    //Method for P
     public static void makePayment(Scanner scanner, ArrayList<Transaction> transactions) {
-        String pink = "\u001B[35m";
+        String pink = "\u001B[95m";
         String cyan = "\u001B[36m";
         String red = "\u001B[31m";
         String green = "\u001B[32m";
@@ -195,5 +195,80 @@ public class Main {
         // Add to ArrayList
         Transaction newTransaction = new Transaction(dateStr, timeStr, description, vendor, amount);
         transactions.add(newTransaction);
+    }
+
+    //Method for L
+    public static void showLedger(Scanner scanner, ArrayList<Transaction> transactions){
+        String pink = "\u001B[95m";
+        String cyan = "\u001B[36m";
+        String yellow = "\u001B[33m";
+        String red = "\u001b[31m]";
+        String reset = "\u001B[0m";
+
+        boolean ledgerRunning = true;
+
+        while (ledgerRunning) {
+            System.out.println(pink + "\n╔═══════════════════════════════════╗");
+            System.out.println("║            LEDGER MENU            ║");
+            System.out.println("╠═══════════════════════════════════╣");
+            System.out.println("║  " + cyan + "A)" + pink + " All Transactions           ║");
+            System.out.println("║  " + cyan + "D)" + pink + " Deposits Only            ║");
+            System.out.println("║  " + cyan + "P)" + pink + " Payments Only            ║");
+            System.out.println("║  " + cyan + "R)" + pink + " Reports                  ║");
+            System.out.println("║  " + cyan + "H)" + pink + " Home (Main Menu)         ║");
+            System.out.println("╚═══════════════════════════════════╝" + reset);
+
+            System.out.print(cyan + "Choose a Ledger option: " + reset);
+            String choice = scanner.nextLine().trim().toUpperCase();
+
+            switch (choice){
+                case "A":
+                    break;
+
+                case "D":
+
+                    break;
+
+                case "P":
+
+                    break;
+
+                case "R":
+
+                    break;
+
+                case "H":
+
+                    break;
+
+                    default:
+                        System.out.print(yellow + "⚠ " + reset);
+                        System.out.println(red + "Please choose from A, D, P, R or H." + reset);
+            }
+        }
+    }
+
+    //Method to display all transactions
+    public static void displayAllTransactions(ArrayList<Transaction> transactions){
+        String pink = "\u001B[95m";
+        String cyan = "\u001B[36m";
+        String reset = "\u001B[0m";
+
+        System.out.println(pink + "\n╔═══════════════════════════════════╗");
+        System.out.println("║          ALL TRANSACTIONS           ║");
+        System.out.println("╠═══════════════════════════════════╣");
+
+        if (transactions.isEmpty()){
+            System.out.println(cyan + "No transactions found." + reset);
+            return;
+        }
+        //Loop and print each transaction
+        for (Transaction t : transactions){
+            System.out.println(cyan + "Date: " + reset + t.getDate());
+            System.out.println(cyan + " | Time: " + reset + t.getTime());
+            System.out.println(cyan + " | Description: " + reset + t.getDescription());
+            System.out.println(cyan + " | Vendor: " + reset + t.getVendor());
+            System.out.println(cyan + " | Amount: " + reset + t.getAmount());
+        }
     }
 }
