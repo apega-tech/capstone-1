@@ -14,6 +14,18 @@ public class Main {
 
             while ((line = reader.readLine()) !=null){
                 System.out.println(line);
+
+                String[] parts = line.split("\\|");
+
+                String date = parts[0];
+                String time = parts[1];
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+
+                Transaction transaction = new Transaction(date, time, description, vendor, amount);
+
+                transaction.add(transaction);
             }
             reader.close();
 
