@@ -39,6 +39,8 @@ public class Main {
         // ANSI color code variables
         String pink = "\u001B[35m";
         String cyan = "\u001B[36m";
+        String yellow = "\u001B[33m";
+        String red = "\u001B[31m";
         String reset = "\u001B[0m";
 
         while (running){
@@ -57,20 +59,23 @@ public class Main {
 
             switch (choice){
                 case "D":
-                    System.out.println(pink + "-> Add Deposit selected: " + reset);
+                    System.out.println(yellow + "-> Add Deposit selected: " + reset);
                     break;
 
                 case "P":
-                    System.out.println(pink + "-> Make Payment selected: " + reset);
+                    System.out.println(yellow + "-> Make Payment selected: " + reset);
                     break;
 
                 case "L":
-                    System.out.println(pink + "-> Ledger screen selected: " + reset);
+                    System.out.println(yellow + "-> Ledger screen selected: " + reset);
                     break;
 
                 case "X":
-                    System.out.println(pink + "-> Exiting application. Bye Bye!" + reset);
+                    System.out.println(yellow + "-> Exiting application. Bye Bye!" + reset);
                     break;
+
+                default:
+                    System.out.println(red + "⚠\uFE0F Please choose D, P, L, or X." + reset);
             }
         }
         scanner.close();
