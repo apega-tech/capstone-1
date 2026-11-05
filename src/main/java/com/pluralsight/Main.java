@@ -72,7 +72,7 @@ public class Main {
                         break;
 
                     case "L":
-                        System.out.println(yellow + "-> Ledger screen selected: " + reset);
+                        showLedger(scanner, transactions);
                         break;
 
                     case "X":
@@ -211,11 +211,11 @@ public class Main {
             System.out.println(pink + "\n╔═══════════════════════════════════╗");
             System.out.println("║            LEDGER MENU            ║");
             System.out.println("╠═══════════════════════════════════╣");
-            System.out.println("║  " + cyan + "A)" + pink + " All Transactions           ║");
-            System.out.println("║  " + cyan + "D)" + pink + " Deposits Only            ║");
-            System.out.println("║  " + cyan + "P)" + pink + " Payments Only            ║");
-            System.out.println("║  " + cyan + "R)" + pink + " Reports                  ║");
-            System.out.println("║  " + cyan + "H)" + pink + " Home (Main Menu)         ║");
+            System.out.println("║  " + cyan + "A)" + pink + " All Transactions              ║");
+            System.out.println("║  " + cyan + "D)" + pink + " Deposits Only                 ║");
+            System.out.println("║  " + cyan + "P)" + pink + " Payments Only                 ║");
+            System.out.println("║  " + cyan + "R)" + pink + " Reports                       ║");
+            System.out.println("║  " + cyan + "H)" + pink + " Home (Main Menu)              ║");
             System.out.println("╚═══════════════════════════════════╝" + reset);
 
             System.out.print(cyan + "Choose a Ledger option: " + reset);
@@ -223,18 +223,19 @@ public class Main {
 
             switch (choice){
                 case "A":
+                    displayAllTransactions(transactions);
                     break;
 
                 case "D":
-
+                    displayDeposits(transactions);
                     break;
 
                 case "P":
-
+                    displayPayments(transactions);
                     break;
 
                 case "R":
-
+                    showReportsMenu(transactions, scanner);
                     break;
 
                 case "H":
@@ -255,7 +256,7 @@ public class Main {
         String reset = "\u001B[0m";
 
         System.out.println(pink + "\n╔═══════════════════════════════════╗");
-        System.out.println("║          ALL TRANSACTIONS           ║");
+        System.out.println("║          ALL TRANSACTIONS         ║");
         System.out.println("╠═══════════════════════════════════╣");
 
         if (transactions.isEmpty()){
@@ -269,6 +270,132 @@ public class Main {
             System.out.println(cyan + " | Description: " + reset + t.getDescription());
             System.out.println(cyan + " | Vendor: " + reset + t.getVendor());
             System.out.println(cyan + " | Amount: " + reset + t.getAmount());
+        }
+    }
+
+    //Method to display only deposits (positive amount)
+    public static void displayDeposits(ArrayList<Transaction> transactions) {
+        String pink = "\u001B[95m";
+        String cyan = "\u001B[36m";
+        String reset = "\u001B[0m";
+
+        System.out.println(pink + "\n╔═══════════════════════════════════╗");
+        System.out.println("║          DEPOSITS ONLY            ║");
+        System.out.println("╠═══════════════════════════════════╣");
+
+        boolean found = false;
+        for (Transaction t : transactions){
+            if (t.getAmount() > 0){
+                System.out.println(cyan + "Date: " + reset + t.getDate());
+                System.out.println(cyan + " | Time: " + reset + t.getTime());
+                System.out.println(cyan + " | Description: " + reset + t.getDescription());
+                System.out.println(cyan + " | Vendor: " + reset + t.getVendor());
+                System.out.println(cyan + " | Amount: " + reset + t.getAmount());
+                found = true;
+            }
+            if (!found){
+                System.out.println(cyan + "No deposits found." + reset);
+            }
+        }
+    }
+
+    //Method to display only payments (negative amount)
+    public static void displayPayments(ArrayList<Transaction> transactions) {
+        String pink = "\u001B[95m";
+        String cyan = "\u001B[36m";
+        String reset = "\u001B[0m";
+
+        System.out.println(pink + "\n╔═══════════════════════════════════╗");
+        System.out.println("║          PAYMENTS ONLY            ║");
+        System.out.println("╠═══════════════════════════════════╣");
+
+        boolean found = false;
+        for (Transaction t : transactions){
+            if (t.getAmount() < 0){
+                System.out.println(cyan + "Date: " + reset + t.getDate());
+                System.out.println(cyan + " | Time: " + reset + t.getTime());
+                System.out.println(cyan + " | Description: " + reset + t.getDescription());
+                System.out.println(cyan + " | Vendor: " + reset + t.getVendor());
+                System.out.println(cyan + " | Amount: " + reset + t.getAmount());
+                found = true;
+            }
+            if (!found) {
+                System.out.println(cyan + "No payments found." + reset);
+            }
+        }
+    }
+
+    public static void showReportsMenu(ArrayList<Transaction> transactions, Scanner scanner){
+        String pink = "\u001B[95m";
+        String cyan = "\u001B[36m";
+        String red = "\u001b[31m]";
+        String yellow = "\u001B[33m";
+        String reset = "\u001B[0m";
+
+        boolean reportsRunning = true;
+
+        while (reportsRunning){
+            System.out.println(pink + "\n╔═══════════════════════════════════╗");
+            System.out.println("║            " + cyan + "REPORTS MENU" + pink+ "           ║");
+            System.out.println("╠═══════════════════════════════════╣");
+            System.out.println("║  " + cyan + "1)" + pink + " Month To Date                 ║");
+            System.out.println("║  " + cyan + "2)" + pink + " Previous Month                ║");
+            System.out.println("║  " + cyan + "3)" + pink + " Year To Date                  ║");
+            System.out.println("║  " + cyan + "4)" + pink + " Previous Year                 ║");
+            System.out.println("║  " + cyan + "5)" + pink + " Search by Vendor              ║");
+            System.out.println("║  " + cyan + "0)" + pink + " Back (To Ledger Menu)         ║");
+            System.out.println("╚═══════════════════════════════════╝" + reset);
+
+            System.out.print(cyan + "Choose a report option: " + reset);
+            String choice = scanner.nextLine().trim();
+
+            switch (choice){
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "0":
+                    reportsRunning = false;
+                    break;
+                default:
+                    System.out.print(yellow + "⚠ " + reset);
+                    System.out.println(red + "Please choose from 0-5." + reset);
+            }
+        }
+    }
+
+    public static void searchByVendor(Scanner scanner, ArrayList<Transaction> transactions){
+        String pink = "\u001B[95m";
+        String cyan = "\u001B[36m";
+        String reset = "\u001B[0m";
+
+        System.out.print(cyan + "Enter vendor name to search: " + reset);
+        String targetVendor = scanner.nextLine().trim();
+
+        System.out.println(pink + "\n╔═══════════════════════════════════════════════════════════╗");
+        System.out.println("║  TRANSACTIONS FOR VENDOR: " + targetVendor + "            ║");
+        System.out.println("╠═══════════════════════════════════════════════════════════╣");
+
+        boolean found = false;
+        for (Transaction t : transactions){
+            if (t.getVendor().equalsIgnoreCase(targetVendor)){
+                System.out.println(cyan + "Date: " + reset + t.getDate());
+                System.out.println(cyan + " | Time: " + reset + t.getTime());
+                System.out.println(cyan + " | Description: " + reset + t.getDescription());
+                System.out.println(cyan + " | Vendor: " + reset + t.getVendor());
+                System.out.println(cyan + " | Amount: " + reset + t.getAmount());
+                found = true;
+            }
+        }
+
+        if (!found){
+            System.out.println(cyan + "No transactions found for vendor" + targetVendor + reset);
         }
     }
 }
