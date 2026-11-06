@@ -1,29 +1,11 @@
 date|time|description|vendor|amount
-2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
-2023-04-16|09:30:12|Office supplies|Staples|-45.20
-2023-04-18|14:00:00|Consulting services|Acme Corp|850.00
-2023-04-20|08:15:45|Coffee and pastries|Local Cafe|-12.75
-2023-04-22|16:45:00|Monthly software subscription|GitHub|-21.00
-2023-04-25|11:20:30|Client website deposit|TechStart|1200.00
-2023-04-28|13:10:05|Team lunch|Chipotle|-68.40
-2023-05-01|10:00:00|Monthly cloud hosting|AWS|-35.00
-2023-05-02|15:30:22|Printer ink cartridge|Best Buy|-54.99
-2023-05-05|09:45:00|Invoice 1002 paid|Global Logistics|2400.00
-2023-05-08|12:30:15|External monitor|Amazon|-199.99
-2023-05-10|14:05:50|High-speed internet bill|Verizon|-79.99
-2023-05-12|16:00:00|Logo design contract|Creative Studio|500.00
-2023-05-15|11:00:33|Office snacks and coffee|Target|-42.15
-2023-05-18|09:15:00|Domain renewal|Namecheap|-14.98
-2023-05-20|13:40:10|Invoice 1003 paid|Delta Inc|950.00
-2023-05-22|10:25:40|Business notebook and pens|Staples|-18.50
-2023-05-25|15:10:00|Client advisory session|Summit Partners|600.00
-2023-05-30|17:00:00|Networking dinner|Local Bistro|-115.80
-2026-11-04|14:48:32|b|bebe|-3.0
-2026-11-04|14:53:49|Water|Ideal|1.0
-2026-11-04|14:59:14|Water|Ideal|20.0
-2026-11-04|14:59:31|Water|Ideal|-20.0
-2026-11-04|17:34:23|KAREN|AMAZON|20.0
-2026-11-04|17:34:46|WATER|AMAZON|-20.0
-2026-11-04|20:58:46|x|x|20.0
-2026-11-04|20:58:56|x|x|-30.0
+2025-06-15|14:00:00|previous year payment|Amazon|-120.00
+2025-08-20|16:30:00|previous year deposit|Joe|1000.00
+2026-05-02|10:00:00|current month deposit|Joe|1500.00
+2026-05-04|12:30:00|current month payment|Amazon|-50.00
+2026-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
+2026-04-18|11:15:00|Invoice 1001 paid|Joe|1500.00
+2026-01-10|09:00:00|january deposit this year|Joe|2000.00
+2025-06-15|14:00:00|previous year payment|Amazon|-120.00
+2025-08-20|16:30:00|previous year deposit|Joe|1000.00
+2026-10-12|14:00:00|test october payment|Target|-35.00
